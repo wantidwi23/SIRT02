@@ -1,0 +1,144 @@
+name: Deploy Laravel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      fail_on_missing_secrets:
+        description: 'true = fail if no deploy password is configured; false = skip gracefully'
+        required: false
+        default: 'false'
+
+jobs:
+  deploy:
+    name: Deploy to cPanel
+    runs-on: ubuntu-latest
+    env:
+      FTP_SERVER: ftp.sirt02.my.id
+      FTP_USERNAME: sirt02@sirt02.my.id
+      DEPLOY_METHOD: ${{ secrets.DEPLOY_METHOD || 'ftps' }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+      SFTP_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+      FAIL_ON_MISSING_SECRETS: ${{ secrets.FAIL_ON_MISSING_SECRETS }}
+
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Report configured deploy settings
+        run: |
+          echo "FTP_SERVER=$FTP_SERVER"
+          echo "FTP_USERNAME=$FTP_USERNAME"
+          if [ -n "$FTP_PASSWORD" ]; then
+            echo "FTP_PASSWORD_SET=true"
+          else
+            echo "FTP_PASSWORD_SET=false"
+          fi
+          if [ -n "$SFTP_PASSWORD" ]; then
+            echo "SFTP_PASSWORD_SET=true"
+          else
+            echo "SFTP_PASSWORD_SET=false"
+          fi
+          if [ -n "$SFTP_PRIVATE_KEY" ]; then
+            echo "SFTP_PRIVATE_KEY_SET=true"
+          else
+            echo "SFTP_PRIVATE_KEY_SET=false"
+          fi
+          echo "DEPLOY_METHOD=$DEPLOY_METHOD"
+          echo "FAIL_ON_MISSING_SECRETS=$FAIL_ON_MISSING_SECRETS"
+
+      - name: Install Composer Dependencies
+        run: |
+          composer install             --no-ansi             --no-dev             --no-interaction             --no-plugins             --no-progress             --no-scripts             --optimize-autoloader
+
+      - name: Create Deployment Artifact
+        run: |
+          mkdir -p deploy-dist
+          zip -r deploy-dist/release.zip . -x "*.git*" -x "node_modules/*" -x "tests/*" -x "deploy-dist/*"
+          
+          cat << 'SCRIPT' > deploy-dist/deploy_script.php
+          <?php
+          ini_set('display_errors', 1);
+          ini_set('display_startup_errors', 1);
+          error_reporting(E_ALL);
+          
+          echo "<pre>";
+          echo "1. Extracting release.zip...\n";
+          
+          if (!class_exists('ZipArchive')) {
+              echo "Warning: ZipArchive extension is missing. Trying system unzip...\n";
+              exec('unzip -o release.zip 2>&1', $output, $returnVar);
+              if ($returnVar !== 0) {
+                  die("System unzip failed. Output: " . implode("\n", $output) . "\n");
+              }
+              echo "Unzipped successfully via system unzip.\n";
+          } else {
+              $zip = new ZipArchive;
+              if ($zip->open('release.zip') === TRUE) {
+                  $zip->extractTo(__DIR__);
+                  $zip->close();
+                  echo "Unzipped successfully via ZipArchive.\n";
+              } else {
+                  die("Fatal Error: ZipArchive extraction failed.\n");
+              }
+          }
+          
+          echo "\n2. Checking extracted files...\n";
+          if (!file_exists(__DIR__.'/vendor/autoload.php')) {
+              die("Fatal Error: vendor/autoload.php not found! The extraction failed or extracted to the wrong path.\n");
+          }
+          
+          echo "Bootstrapping Laravel...\n";
+          
+          // Trik untuk mencegah Fatal Error jika tabel cache/session belum dibuat di database
+          putenv('CACHE_STORE=array');
+          putenv('SESSION_DRIVER=array');
+          $_ENV['CACHE_STORE'] = 'array';
+          $_ENV['SESSION_DRIVER'] = 'array';
+          
+          require __DIR__.'/vendor/autoload.php';
+          $app = require_once __DIR__.'/bootstrap/app.php';
+          $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+          
+          try {
+              echo "\n3. Running Migrations...\n";
+              $kernel->call('migrate', ['--force' => true]);
+              echo "Migration output:\n" . $kernel->output() . "\n";
+              
+              echo "\n4. Clearing Cache...\n";
+              $kernel->call('optimize:clear');
+              echo $kernel->output() . "\n";
+          } catch (\Exception $e) {
+              echo "\nLaravel Command Error: " . $e->getMessage() . "\n";
+          }
+          
+          echo "\n5. Cleaning up...\n";
+          @unlink('release.zip');
+          @unlink(__FILE__);
+          echo "Deployment finished successfully!\n</pre>";
+          SCRIPT
+
+      - name: Upload Zip and Script via FTP Action
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ env.FTP_SERVER }}
+          username: ${{ env.FTP_USERNAME }}
+          password: ${{ env.FTP_PASSWORD }}
+          protocol: ${{ env.DEPLOY_METHOD }}
+          port: 21
+          local-dir: deploy-dist/
+          server-dir: ./
+
+      - name: Deployment Summary
+        run: |
+          echo "✓ Files uploaded via FTP."
+          echo "Action Required: You must trigger the deployment script by visiting the URL where deploy_script.php was uploaded."
+          echo "For example: curl https://sirt02.my.id/sirt02/deploy_script.php"

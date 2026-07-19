@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Block access to .env and other sensitive files
+    RewriteRule ^\.env - [F,L,NC]
+    RewriteRule ^(?:bootstrap|config|database|resources|storage|tests|vendor|artisan)(/.*)?$ - [F,L,NC]
+    
+    # Allow direct access to deploy_script.php
+    RewriteCond %{REQUEST_URI} deploy_script\.php$
+    RewriteRule ^ - [L]
+    
+    # Route everything else to public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
