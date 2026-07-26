@@ -42,7 +42,7 @@
         <div class="row align-items-center content">
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <h2>Sistem Informasi<br><span style="color: #6bb8a1;">Administrasi RT</span></h2>
-            <p class="lead">Solusi digital modern untuk pengelolaan administrasi Rukun Tetangga yang lebih efisien dan terpercaya dengan teknologi terkini</p>
+            <p class="lead">Website berbasis Chatbot AI untuk digitalisasi laporan, surat, dan pendataan warga yang lebih efisien.</p>
             <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
               @if(auth()->check() || session('head_of_family_id'))
                 @if(session('head_of_family_id'))
@@ -60,7 +60,7 @@
           </div>
           <div class="col-lg-6">
             <div class="hero-image">
-              <img src="assets/img/bg.png" alt="Portfolio Hero Image" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
+              <img src="assets/img/fotountukwebsite.jpg" alt="Portfolio Hero Image" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
               <div class="shape-1"></div>
               <div class="shape-2"></div>
             </div>
@@ -91,7 +91,7 @@
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="vision-mission-card mission-card">
               <div class="vision-mission-icon">
-                <i class="bi bi-target"></i>
+                <i class="bi bi-eye"></i>
               </div>
               <h3>Misi</h3>
               <ul class="mission-list">
@@ -154,12 +154,6 @@
               <p>Data terenkripsi dan terlindungi dengan sistem keamanan berlapis</p>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="feature-item">
-              <i class="bi bi-graph-up"></i>
-              <h3>Laporan & Analitik</h3>
-              <p>Analisis data dan laporan komprehensif untuk pengambilan keputusan</p>
             </div>
           </div>
         </div>
@@ -480,13 +474,13 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
+        <h2>Pertanyaan yang sering diajukan</h2>
         <div class="title-shape">
           <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
             <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
           </svg>
         </div>
-        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem</p>
+        <p>Belum menemukan jawaban yang kamu cari? Chatbot Asisten RT siap membantu kapan saja, atau simak dulu pertanyaan yang sering diajukan berikut ini.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -498,49 +492,92 @@
             <div class="faq-container">
 
               <div class="faq-item faq-active">
-                <h3>Non consectetur a erat nam at lectus urna duis?</h3>
+                <h3>Dokumen apa saja yang perlu disiapkan untuk membuat surat keterangan domisili?</h3>
                 <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
+                  <p>
+                    <ol>
+                      <li>Fotokopi KTP</li>
+                      <li>Fotokopi KK</li>
+                      <li>Surat pengantar dari RT/RW</li>
+                      <li>Formulir permohonan yang telah diisi</li>
+                      <li>Dokumen pendukung lainnya sesuai kebutuhan</li>
+                    </ol>
+                  </p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Feugiat scelerisque varius morbi enim nunc faucibus?</h3>
+                <h3>Jenis surat pengantar apa saja yang bisa diajukan melalui sistem ini (misalnya SKCK, domisili, usaha, dll)?</h3>
                 <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                  <p>
+                    <ol>
+                      <li>Surat SKCK</li>
+                      <li>Surat Domisili</li>
+                      <li>Surat Usaha</li>
+                      <li>Surat Keterangan Tidak Mampu (SKTM)</li>
+                      <li>Surat Pengantar Nikah</li>
+                      <li>Surat Keterangan Pindah</li>
+                      <li>Surat Keterangan Kehilangan</li>
+                      <li>Surat Keterangan Kelahiran</li>
+                      <li>Surat Keterangan Kematian</li>
+                    </ol>
+                  </p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
+                <h3>Apa saja syarat yang diperlukan untuk mengurus surat pengantar pembuatan KTP?</h3>
                 <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
+                  <p>
+                    <ol>
+                      <li>Fotokopi KK</li>
+                      <li>Surat pengantar dari RT/RW</li>
+                      <li>Formulir permohonan yang telah diisi</li>
+                    </ol>
+                  </p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</h3>
+                <h3>Apa saja syarat yang diperlukan untuk mengurus surat pengantar nikah dari RT?</h3>
                 <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
+                  <p>
+                    <ul>
+                      <li>Fotokopi KTP calon pengantin pria dan wanita</li>
+                      <li>Surat pengantar dari RT/RW</li>
+                      <li>Formulir permohonan yang telah diisi</li>
+                      <li>Fotokopi akta kelahiran</li>
+                      <li> Surat persetujuan orang tua/wali (jika diperlukan)</li>
+                    </ul>
+                  </p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Tempus quam pellentesque nec nam aliquam sem et tortor?</h3>
+                <h3>Apa saja syarat yang diperlukan untuk mengajukan pembuatan KK baru melalui RT?</h3>
                 <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
+                  <p>
+                    <ol>
+                      <li>Fotokopi KTP</li>
+                    </ol>
+                  </p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3>Perspiciatis quod quo quos nulla quo illum ullam?</h3>
+                <h3>Untuk keperluan apa saja SKTM ini biasanya digunakan (sekolah, kesehatan, dll)?</h3>
                 <div class="faq-content">
-                  <p>Enim ea facilis quaerat voluptas quidem et dolorem. Quis et consequatur non sed in suscipit sequi. Distinctio ipsam dolore et.</p>
+                  <p>
+                    <ol>
+                      <li>Untuk keperluan pendaftaran sekolah</li>
+                      <li>Untuk keperluan pendaftaran rumah sakit</li>
+                      <li>Untuk keperluan pendaftaran beasiswa</li>
+                  </p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
@@ -565,7 +602,7 @@
               <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
             </svg>
           </div>
-          <p>Lokasi rumah Ketua RT untuk keperluan administrasi dan konsultasi masyarakat</p>
+          <p></p>
         </div>
 
         <div class="row align-items-stretch" data-aos="fade-up" data-aos-delay="100">
@@ -583,7 +620,7 @@
                   <i class="bi bi-geo-alt"></i>
                   <div>
                     <h4>Alamat</h4>
-                    <p>Jl. Rukun Tetangga No. 123<br>Kota/Kabupaten, Provinsi 12345</p>
+                    <p>Jl. Bhakti 3 RT 02/ RW 06 No.100<br>Cimanggis, Depok, 16451</p>
                   </div>
                 </div>
 
@@ -591,7 +628,8 @@
                   <i class="bi bi-telephone"></i>
                   <div>
                     <h4>Nomor Telepon</h4>
-                    <p>+62 812-3456-7890<br>+62 274-1234567</p>
+                    <p> 0895391790535<br>
+
                   </div>
                 </div>
 
@@ -599,7 +637,7 @@
                   <i class="bi bi-clock"></i>
                   <div>
                     <h4>Jam Konsultasi</h4>
-                    <p>Senin - Jumat: 09:00 - 17:00<br>Sabtu: 09:00 - 12:00</p>
+                    <p>Senin - Jumat: 09:00 - 17:00<br>Sabtu - Minggu 09:00 - 12:00</p>
                   </div>
                 </div>
               </div>

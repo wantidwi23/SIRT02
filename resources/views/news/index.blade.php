@@ -351,7 +351,7 @@
         <section class="page-header">
             <div class="container">
                 <h1>Berita & Pengumuman</h1>
-                <p>Informasi terbaru dari Rukun Tetangga</p>
+                <p>Informasi terbaru dari RT 02/ RW 06 </p>
             </div>
         </section>
 
