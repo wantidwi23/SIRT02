@@ -3,6 +3,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/sirp7472/public_html/
     - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH/
     - cd $DEPLOYPATH
     - mkdir -p storage/framework/cache/data
     - mkdir -p storage/framework/sessions
