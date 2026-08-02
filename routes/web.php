@@ -89,3 +89,40 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+// System Routes (Deployment setup)
+Route::get('/system/deploy-setup', function () {
+    try {
+        $output = [];
+        // Clear caches
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        $output[] = \Illuminate\Support\Facades\Artisan::output();
+        
+        // Recreate storage link
+        if (file_exists(public_path('storage'))) {
+            if (is_link(public_path('storage'))) {
+                unlink(public_path('storage'));
+            } else {
+                // If it's a directory, remove it (happens sometimes on cPanel)
+                // Use built-in File facade or recursive delete
+                \Illuminate\Support\Facades\File::deleteDirectory(public_path('storage'));
+            }
+        }
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        $output[] = \Illuminate\Support\Facades\Artisan::output();
+
+        // Run migrations
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        $output[] = \Illuminate\Support\Facades\Artisan::output();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Deployment setup completed successfully.',
+            'details' => $output
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
