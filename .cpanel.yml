@@ -1,7 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/sirp7472/public_html/
-    - /bin/cp -R * $DEPLOYPATH
-    - /bin/cp .htaccess $DEPLOYPATH/
-    - /bin/sh -c "cd /home/sirp7472/public_html/ && mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache && chmod -R 775 storage bootstrap/cache && composer install --no-dev --optimize-autoloader --no-interaction --quiet && php artisan migrate --force && php artisan optimize:clear"

@@ -1,0 +1,57 @@
+{
+    "tanggal": "2026-07-14 15:42:44",
+    "rata_rata_skor": 1,
+    "status": "GAGAL",
+    "detail_evaluasi": [
+        {
+            "question": "Apa saja syarat untuk membuat Surat Keterangan?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Kapan jadwal pelayanan di hari Sabtu?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Berapa lama proses pembuatan surat?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Apakah pelayanan buka di hari Minggu?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Apa syarat membuat Surat Tidak Mampu?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Bagaimana alur prosedur permohonan surat di RT?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Siapa presiden Indonesia saat ini?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Tolong buatkan resep nasi goreng yang enak.",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Berapa harga emas hari ini per gram?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        },
+        {
+            "question": "Bagaimana cara mengobati sakit flu?",
+            "score": 1,
+            "reasoning": "Gagal terhubung ke API Juri: HTTP 429"
+        }
+    ]
+}
